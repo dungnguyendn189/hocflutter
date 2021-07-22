@@ -17,10 +17,10 @@ class _songNavigatorState extends State<songNavigator> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: fPrimary,
+          backgroundColor: Colors.black,
           title: Center(
             child: Text(
-              '',
+              'Thánh Ca Công Giáo',
               style:
                   GoogleFonts.anton(textStyle: TextStyle(color: Colors.white)),
             ),
@@ -31,7 +31,7 @@ class _songNavigatorState extends State<songNavigator> {
             child: SingleChildScrollView(
           child: Container(
             height: 716,
-            color: fPrimary,
+            color: Colors.black,
             child: Container(
               padding:
                   EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -41,7 +41,7 @@ class _songNavigatorState extends State<songNavigator> {
                     return Card(
                       elevation: 20,
                       child: Container(
-                        color: fPrimary,
+                        color: Colors.black,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

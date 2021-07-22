@@ -17,7 +17,7 @@ class _SingerNavigatorState extends State<SingerNavigator> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: fPrimary,
+          backgroundColor: Colors.black,
           title: Center(
             child: Text(
               'Nghệ Sĩ',
@@ -31,7 +31,7 @@ class _SingerNavigatorState extends State<SingerNavigator> {
             child: SingleChildScrollView(
           child: Container(
             height: 716,
-            color: fPrimary,
+            color: Colors.black,
             child: Container(
               padding:
                   EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
@@ -41,7 +41,7 @@ class _SingerNavigatorState extends State<SingerNavigator> {
                     return Card(
                       elevation: 20,
                       child: Container(
-                        color: fPrimary,
+                        color: Colors.black,
                         padding: EdgeInsets.only(top: 10, bottom: 10),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,

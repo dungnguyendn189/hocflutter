@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fullui/models/colorslist.dart';
@@ -7,6 +5,9 @@ import 'package:fullui/models/songandsinger.dart';
 import 'package:fullui/navigatorall/singer_navigator.dart';
 import 'package:fullui/navigatorall/song_navigator.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'navigatorall/player_navigator.dart';
+import 'navigatorall/singersong_navigator.dart';
 
 void main() => runApp(MaterialApp(
       title: 'Thánh Ca Công Giáo',
@@ -24,6 +25,8 @@ class ThanhCa extends StatefulWidget {
 class _ThanhCaState extends State<ThanhCa> {
   final List<Singerlist> allSinger = singersList;
   final List<Song> allSong = song;
+
+  get index => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +58,7 @@ class _ThanhCaState extends State<ThanhCa> {
                       borderRadius: BorderRadius.circular(30),
                       child: Image.asset('assets/photo/logon.jpg'),
                     ),
-                  ),
+                  ), // <-- Hinh nen
                   Container(
                     height: 50,
                     child: Row(
@@ -67,8 +70,7 @@ class _ThanhCaState extends State<ThanhCa> {
                                   MaterialPageRoute(
                                       builder: (context) => SingerNavigator()));
                             },
-                            child: Text(
-                                'Nghệ Sĩ ====================================',
+                            child: Text('Nghệ Sĩ ',
                                 style: GoogleFonts.pacifico(
                                   textStyle: TextStyle(
                                       color: Colors.white,
@@ -77,7 +79,7 @@ class _ThanhCaState extends State<ThanhCa> {
                                 ))),
                       ],
                     ),
-                  ),
+                  ), // <-- Nut Nghe Si
                   Column(
                     children: [
                       Container(
@@ -89,34 +91,45 @@ class _ThanhCaState extends State<ThanhCa> {
                               scrollDirection: Axis.horizontal,
                               itemCount: allSinger.length,
                               itemBuilder: (context, index) {
-                                return Container(
-                                    margin: EdgeInsets.all(5),
-                                    width: 150,
-                                    padding: EdgeInsets.only(right: 10),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            allSinger[index].imageSingers),
-                                        fit: BoxFit.cover,
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SingerSong(
+                                                  singerID:
+                                                      allSinger[index].singerId,
+                                                )));
+                                  },
+                                  child: Container(
+                                      margin: EdgeInsets.all(5),
+                                      width: 150,
+                                      padding: EdgeInsets.only(right: 10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              allSinger[index].imageSingers),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Text(
-                                        allSinger[index].singer,
-                                        style: GoogleFonts.anton(
-                                            textStyle: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
-                                                color: Colors.white)),
-                                      ),
-                                    ));
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Text(
+                                          allSinger[index].singer,
+                                          style: GoogleFonts.anton(
+                                              textStyle: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                  color: Colors.white)),
+                                        ),
+                                      )),
+                                );
                               }),
                         ),
                       ),
                     ],
-                  ),
+                  ), // Singer list
                   Container(
                     height: 50,
                     child: Row(
@@ -129,8 +142,7 @@ class _ThanhCaState extends State<ThanhCa> {
                                     builder: (context) => songNavigator()),
                               );
                             },
-                            child: Text(
-                                'Bài Hát ====================================',
+                            child: Text('Bài Hát ',
                                 style: GoogleFonts.pacifico(
                                   textStyle: TextStyle(
                                       color: Colors.white,
@@ -139,14 +151,18 @@ class _ThanhCaState extends State<ThanhCa> {
                                 )))
                       ],
                     ),
-                  ),
+                  ), // <- list bai hat
                   Column(
                     children: [
                       Container(
                         height: 160,
                         child: InkWell(
                           onTap: () {
-                            print('d');
+                            print(Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyPlayerCustom(
+                                        allsongID: song[index].songId))));
                           },
                           child: ListView.builder(
                               itemCount: allSong.length,
