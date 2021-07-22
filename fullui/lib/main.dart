@@ -143,7 +143,6 @@ class _ThanhCaState extends State<ThanhCa> {
                   Column(
                     children: [
                       Container(
-<<<<<<< HEAD
                         height: 160,
                         child: InkWell(
                           onTap: () {
@@ -154,24 +153,11 @@ class _ThanhCaState extends State<ThanhCa> {
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
                                 return Column(
-=======
-                        height: 170,
-                        child: ListView.builder(
-                            itemCount: allSong.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.all(10),
-                                child: Column(
->>>>>>> c0ce816506f019af327635b558a4e29ab8a599ba
                                   children: [
                                     Container(
                                       height: 80,
                                       width: 80,
-<<<<<<< HEAD
                                       margin: EdgeInsets.all(10),
-=======
->>>>>>> c0ce816506f019af327635b558a4e29ab8a599ba
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
@@ -180,7 +166,6 @@ class _ThanhCaState extends State<ThanhCa> {
                                         borderRadius: BorderRadius.circular(50),
                                       ),
                                     ),
-<<<<<<< HEAD
                                     Container(
                                       margin: EdgeInsets.all(10),
                                       child: Column(
@@ -204,25 +189,6 @@ class _ThanhCaState extends State<ThanhCa> {
                                 );
                               }),
                         ),
-=======
-                                    Text(
-                                      allSong[index].songName,
-                                      style: GoogleFonts.anton(
-                                          textStyle:
-                                              TextStyle(color: Colors.white)),
-                                    ),
-                                    Text(
-                                      allSong[index].singer,
-                                      style: GoogleFonts.anton(
-                                          textStyle: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10)),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
->>>>>>> c0ce816506f019af327635b558a4e29ab8a599ba
                       )
                     ],
                   )
