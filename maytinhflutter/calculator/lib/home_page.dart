@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'logic_caculator.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -9,12 +11,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Logicalculator logicalculator = Logicalculator();
   @override
   Widget build(BuildContext context) {
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            logicalculator.currentText
+                .add('${logicalculator.currentText.value}$value');
+          },
           child: Container(
             height: 60,
             width: 60,
@@ -39,16 +45,21 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  '0',
-                  style: TextStyle(
-                    fontSize: 80,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              child: StreamBuilder<String>(
+                  stream: logicalculator.currentText,
+                  builder: (context, snapshot) {
+                    String text = snapshot.data ?? '0';
+                    return Container(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        text,
+                        style: TextStyle(
+                          fontSize: 80,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  }),
             ),
             SizedBox(
               height: 70,
