@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +16,24 @@ class _HomePageState extends State<HomePage> {
   Logicalculator logicalculator = Logicalculator();
   @override
   Widget build(BuildContext context) {
+    
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
           onPressed: () {
+           
             logicalculator.currentText
-                .add('${logicalculator.currentText.value}$value');
+                .add('${logicalculator.currentText.value}$value',
+                );
+                 if (value == 'AC'){
+              
+             logicalculator.currentText
+                .add('0'
+                );
+            }
+            
+            print(value);
+               
           },
           child: Container(
             height: 60,
