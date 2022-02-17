@@ -16,24 +16,16 @@ class _HomePageState extends State<HomePage> {
   Logicalculator logicalculator = Logicalculator();
   @override
   Widget build(BuildContext context) {
-    
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
           onPressed: () {
-           
             logicalculator.currentText
-                .add('${logicalculator.currentText.value}$value',
-                );
-                 if (value == 'AC'){
-              
-             logicalculator.currentText
-                .add('0'
-                );
+                .add('${logicalculator.currentText.value}$value');
+            if (value == 'AC') {
+              logicalculator.currentText.add('');
             }
-            
             print(value);
-               
           },
           child: Container(
             height: 60,
