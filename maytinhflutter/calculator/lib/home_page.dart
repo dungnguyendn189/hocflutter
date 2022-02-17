@@ -25,7 +25,17 @@ class _HomePageState extends State<HomePage> {
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
-            print(value);
+            if (value == '+') {
+              final fullText = logicalculator.currentText.value;
+              logicalculator.first.add(fullText.replaceAll('+', ''));
+            }
+            if (value == '=') {
+              final secondValue = logicalculator.currentText.value.split('+');
+              final secondValueAsint = secondValue[1].replaceAll('=', '');
+              final result = (int.tryParse(logicalculator.first.value) ?? 0) +
+                  (int.tryParse(secondValueAsint) ?? 0);
+              logicalculator.currentText.add(result.toString());
+            }
           },
           child: Container(
             height: 60,
