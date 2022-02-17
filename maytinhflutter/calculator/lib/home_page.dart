@@ -25,7 +25,8 @@ class _HomePageState extends State<HomePage> {
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
-            print(value);
+            if (logicalculator.currentText.value == '=') {}
+            print(logicalculator.currentText.value);
           },
           child: Container(
             height: 60,
