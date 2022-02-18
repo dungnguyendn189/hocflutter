@@ -16,6 +16,9 @@ class _HomePageState extends State<HomePage> {
   Logicalculator logicalculator = Logicalculator();
   @override
   Widget build(BuildContext context) {
+    String operation = '';
+    String overResult;
+
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
@@ -25,8 +28,77 @@ class _HomePageState extends State<HomePage> {
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
-            if (logicalculator.currentText.value == '=') {}
-            print(logicalculator.currentText.value);
+
+            if (value == '+') {
+              final fullText = logicalculator.currentText.value;
+              logicalculator.first.add(fullText.replaceAll('+', ''));
+              operation = value;
+            }
+            if (value == '-') {
+              final fulltext = logicalculator.currentText.value;
+              logicalculator.first.add(fulltext.replaceAll('-', ''));
+              operation = value;
+            }
+            if (value == '/') {
+              final fulltext = logicalculator.currentText.value;
+              logicalculator.first.add(fulltext.replaceAll('/', ''));
+              operation = value;
+            }
+            if (value == '*') {
+              final fulltext = logicalculator.currentText.value;
+              logicalculator.first.add(fulltext.replaceAll('/', ''));
+              operation = value;
+            }
+            if (value == '%') {
+              final fulltext = logicalculator.currentText.value;
+              logicalculator.first.add(fulltext.replaceAll('/', ''));
+              operation = value;
+            }
+
+            if (value == '=') {
+              if (operation == '-') {
+                final secondValue =
+                    logicalculator.currentText.value.split(operation);
+                final secondValueAsint = secondValue[1].replaceAll('=', '');
+                final result = (int.tryParse(logicalculator.first.value) ?? 0) -
+                    (int.tryParse(secondValueAsint) ?? 0);
+                logicalculator.currentText.add(result.toString());
+              }
+              if (operation == '+') {
+                final secondValue =
+                    logicalculator.currentText.value.split(operation);
+                final secondValueAsint = secondValue[1].replaceAll('=', '');
+                final result = (int.tryParse(logicalculator.first.value) ?? 0) +
+                    (int.tryParse(secondValueAsint) ?? 0);
+                logicalculator.currentText.add(result.toString());
+              }
+              if (operation == '/') {
+                final secondValue =
+                    logicalculator.currentText.value.split(operation);
+                final secondValueAsit = secondValue[1].replaceAll('=', '');
+                final result = (int.tryParse(logicalculator.first.value) ?? 0) /
+                    (int.tryParse(secondValueAsit) ?? 0);
+                logicalculator.currentText.add(result.toString());
+              }
+              if (operation == '*') {
+                final secondValue =
+                    logicalculator.currentText.value.split(operation);
+                final secondValueAsit = secondValue[1].replaceAll('=', '');
+                final result = (int.tryParse(logicalculator.first.value) ?? 0) *
+                    (int.tryParse(secondValueAsit) ?? 0);
+                logicalculator.currentText.add(result.toString());
+              }
+              if (operation == '%') {
+                final secondValue =
+                    logicalculator.currentText.value.split(operation);
+                final secondValueAsit = secondValue[1].replaceAll('=', '');
+                final result =
+                    ((int.tryParse(logicalculator.first.value) ?? 0) /
+                            (int.tryParse(secondValueAsit) ?? 0)) *
+                        100;
+                logicalculator.currentText.add(result.toString());
+              }
+            }
           },
           child: Container(
             height: 60,
