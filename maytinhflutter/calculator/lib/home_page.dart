@@ -26,8 +26,11 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
-
-            print(logicalculator.currentText.value);
+            logicalculator.currentText.value.replaceAll('=', '');
+            if (logicalculator.currentText.value == '+') {
+              logicalculator.currentText.value.split('+');
+              print(logicalculator.currentText.value);
+            }
 
             if (value == 'AC') {
               logicalculator.currentText.add('');
