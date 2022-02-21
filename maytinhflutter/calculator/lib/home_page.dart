@@ -17,7 +17,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     String operation = '';
-    String overResult;
+    int enumf = 0;
+    String finalenum;
 
     Widget customButton(String value) {
       return Expanded(
@@ -25,10 +26,39 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
+
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
-
+            if (value == '+/-') {
+              enumf++;
+              if (enumf % 2 == 0) {
+                final fulltext = logicalculator.currentText.value;
+                logicalculator.first.add(fulltext.replaceAll('+/-', ''));
+                // if (enumf % 2 == 0) {
+                //   logicalculator.currentText.value =
+                //       logicalculator.currentText.value.replaceAll('+/-', '');
+                // }
+                // if (enumf % 2 != 0) {
+                //   logicalculator.currentText.value =
+                //       logicalculator.currentText.value.replaceAll('+/-', '');
+                // }
+              }
+              if (enumf % 2 != 0) {
+                final fulltext = logicalculator.currentText.value;
+                logicalculator.first.add(fulltext.replaceAll('+/-', ''));
+                logicalculator.currentText.value = '-' +
+                    logicalculator.currentText.value.replaceAll('+/-', '');
+              }
+              if (enumf % 2 == 0) {
+                final fulltext = logicalculator.currentText.value;
+                logicalculator.first.add(fulltext.replaceAll('+/-', ''));
+                logicalculator.currentText.value =
+                    logicalculator.currentText.value.replaceAll('+/-', '');
+                logicalculator.currentText.value =
+                    logicalculator.currentText.value.replaceAll('-', '');
+              }
+            }
             if (value == '+') {
               final fullText = logicalculator.currentText.value;
               logicalculator.first.add(fullText.replaceAll('+', ''));
@@ -91,6 +121,7 @@ class _HomePageState extends State<HomePage> {
               if (operation == '%') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
+
                 final secondValueAsit = secondValue[1].replaceAll('=', '');
                 final result =
                     ((int.tryParse(logicalculator.first.value) ?? 0) /
@@ -98,11 +129,12 @@ class _HomePageState extends State<HomePage> {
                         100;
                 logicalculator.currentText.add(result.toString());
               }
+              logicalculator.currentText.value =
+                  logicalculator.currentText.value.replaceAll('=', '');
             }
           },
           child: Container(
-            height: 60,
-            width: 60,
+            padding: EdgeInsets.all(10),
             alignment: Alignment.center,
             decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             child: Text(
@@ -118,7 +150,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Máy tính cầm tay"),
+        title: Text("Máy tính cầm tay by PoNa Team"),
       ),
       body: Container(
         child: Column(
@@ -144,49 +176,49 @@ class _HomePageState extends State<HomePage> {
               height: 70,
             ),
             Expanded(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      customButton("AC"),
-                      customButton("+/-"),
-                      customButton("%"),
-                      customButton("/"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      customButton("9"),
-                      customButton("8"),
-                      customButton("7"),
-                      customButton("*"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      customButton("6"),
-                      customButton("5"),
-                      customButton("4"),
-                      customButton("+"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      customButton("3"),
-                      customButton("2"),
-                      customButton("1"),
-                      customButton("-"),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      customButton("C"),
-                      customButton("0"),
-                      customButton("/"),
-                      customButton("="),
-                    ],
-                  ),
-                ],
+              child: Container(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        customButton("AC"),
+                        customButton("+/-"),
+                        customButton("%"),
+                        customButton("/"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        customButton("9"),
+                        customButton("8"),
+                        customButton("7"),
+                        customButton("*"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        customButton("6"),
+                        customButton("5"),
+                        customButton("4"),
+                        customButton("+"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        customButton("3"),
+                        customButton("2"),
+                        customButton("1"),
+                        customButton("-"),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        customButton("0"),
+                        customButton("="),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
           ],
