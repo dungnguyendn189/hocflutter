@@ -83,6 +83,16 @@ class _HomePageState extends State<HomePage> {
               if (operation == '-') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
+                if (secondValue.length == 3) {
+                  // case số đầu là số có dấu -
+                  secondValue.remove(
+                      ""); // xoá cmn cái rỗng, ví dụ  [, 2, 1=]  ==> xoá thành [2, 1=]
+                  secondValue[0] =
+                      "-${secondValue[0]}"; // thay cmn số đầu, add dấu - [2, 1=] thành [-2, 1=]
+                } else {
+                  // case số đầu ko có dấu -
+
+                }
                 print(secondValue);
                 final secondValueAsint = secondValue[1].replaceAll('=', '');
                 final result = (int.tryParse(logicalculator.first.value) ?? 0) -
