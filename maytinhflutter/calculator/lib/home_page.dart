@@ -1,4 +1,4 @@
-import 'dart:html';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +27,8 @@ class _HomePageState extends State<HomePage> {
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
 
+            print(logicalculator.currentText.value);
+
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
@@ -35,14 +37,6 @@ class _HomePageState extends State<HomePage> {
               if (enumf % 2 == 0) {
                 final fulltext = logicalculator.currentText.value;
                 logicalculator.first.add(fulltext.replaceAll('+/-', ''));
-                // if (enumf % 2 == 0) {
-                //   logicalculator.currentText.value =
-                //       logicalculator.currentText.value.replaceAll('+/-', '');
-                // }
-                // if (enumf % 2 != 0) {
-                //   logicalculator.currentText.value =
-                //       logicalculator.currentText.value.replaceAll('+/-', '');
-                // }
               }
               if (enumf % 2 != 0) {
                 final fulltext = logicalculator.currentText.value;
@@ -89,6 +83,7 @@ class _HomePageState extends State<HomePage> {
               if (operation == '-') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
+                print(secondValue);
                 final secondValueAsint = secondValue[1].replaceAll('=', '');
                 final result = (int.tryParse(logicalculator.first.value) ?? 0) -
                     (int.tryParse(secondValueAsint) ?? 0);
