@@ -26,11 +26,6 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
-            logicalculator.currentText.value.replaceAll('=', '');
-            if (logicalculator.currentText.value == '+') {
-              logicalculator.currentText.value.split('+');
-              print(logicalculator.currentText.value);
-            }
 
             if (value == 'AC') {
               logicalculator.currentText.add('');
@@ -52,8 +47,6 @@ class _HomePageState extends State<HomePage> {
                 logicalculator.first.add(fulltext.replaceAll('+/-', ''));
                 logicalculator.currentText.value =
                     logicalculator.currentText.value.replaceAll('+/-', '');
-                logicalculator.currentText.value =
-                    logicalculator.currentText.value.replaceAll('-', '');
               }
             }
             if (value == '+') {
@@ -73,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             }
             if (value == '*') {
               final fulltext = logicalculator.currentText.value;
-              logicalculator.first.add(fulltext.replaceAll('/', ''));
+              logicalculator.first.add(fulltext.replaceAll('*', ''));
               operation = value;
             }
             if (value == '%') {
