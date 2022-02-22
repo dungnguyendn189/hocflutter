@@ -19,16 +19,30 @@ class _HomePageState extends State<HomePage> {
     String operation = '';
     int enumf = 0;
     String finalenum;
+    bool canInputAddOrSubSubtract(String newAddedString) {
+      String currentText = logicalculator.currentText.value;
+      if (currentText == '') {
+        // hiện tại trên màn hình del có text chi
+        if (newAddedString == '+' || newAddedString == '-') {
+          // kiểm tra coi nhấn + - mà màn hình ddel có sốchi
+          return false;
+        }
+      }
+      return true;
+    }
 
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
           onPressed: () {
+            if (!canInputAddOrSubSubtract(value)) {
+              // coi cái điều kiện ni
+              return;
+            }
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
             logicalculator.currentText.value.replaceAll('=', '');
             if (logicalculator.currentText.value == '+') {
-              logicalculator.currentText.value.split('+');
               print(logicalculator.currentText.value);
             }
 
