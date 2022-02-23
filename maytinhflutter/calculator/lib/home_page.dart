@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +20,50 @@ class _HomePageState extends State<HomePage> {
     String operation = '';
     int enumf = 0;
     String finalenum;
+    bool canInput(String newOperationRT) {
+      String newOperationRT = logicalculator.currentText.value;
+      if (newOperationRT == newOperationRT) {
+        if (newOperationRT == '=') {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    bool canInputAddOrSubSubtract(String newAddedString) {
+      String currentText = logicalculator.currentText.value;
+
+      if (currentText == '') {
+        // hiện tại trên màn hình del có text chi
+        if (newAddedString == '+' ||
+            newAddedString == '-' ||
+            newAddedString == '*' ||
+            newAddedString == '/' ||
+            newAddedString == '%') {
+          // kiểm tra coi nhấn + - mà màn hình ddel có sốchi
+          return false;
+        }
+      }
+      if (currentText.length - 2 == newAddedString) {
+        if (newAddedString == '++') {
+          return false;
+        }
+        return true;
+      }
+      return true;
+    }
 
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
           onPressed: () {
+            if (!canInput(logicalculator.currentText.value)) {
+              return;
+            }
+            if (!canInputAddOrSubSubtract(value)) {
+              // coi cái điều kiện ni
+              return;
+            }
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
 
@@ -32,26 +72,27 @@ class _HomePageState extends State<HomePage> {
             }
             if (value == '+/-') {
               enumf++;
-              if (enumf % 2 == 0) {
-                final fulltext = logicalculator.currentText.value;
-                logicalculator.first.add(fulltext.replaceAll('+/-', ''));
-              }
+
               if (enumf % 2 != 0) {
                 final fulltext = logicalculator.currentText.value;
                 logicalculator.first.add(fulltext.replaceAll('+/-', ''));
-                logicalculator.currentText.value = '-' +
-                    logicalculator.currentText.value.replaceAll('+/-', '');
+                logicalculator.currentText.value =
+                    ('-${logicalculator.currentText.value.replaceAll('+/-', '')}');
               }
               if (enumf % 2 == 0) {
                 final fulltext = logicalculator.currentText.value;
                 logicalculator.first.add(fulltext.replaceAll('+/-', ''));
                 logicalculator.currentText.value =
                     logicalculator.currentText.value.replaceAll('+/-', '');
+                logicalculator.currentText.value =
+                    logicalculator.currentText.value.replaceAll('-', '');
               }
+              print(enumf);
             }
             if (value == '+') {
               final fullText = logicalculator.currentText.value;
               logicalculator.first.add(fullText.replaceAll('+', ''));
+              print(logicalculator.currentText.value);
               operation = value;
             }
             if (value == '-') {
@@ -114,7 +155,9 @@ class _HomePageState extends State<HomePage> {
               if (operation == '*') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
+
                 final secondValueAsit = secondValue[1].replaceAll('=', '');
+
                 final result = (int.tryParse(logicalculator.first.value) ?? 0) *
                     (int.tryParse(secondValueAsit) ?? 0);
                 logicalculator.currentText.add(result.toString());
@@ -129,6 +172,7 @@ class _HomePageState extends State<HomePage> {
                             (int.tryParse(secondValueAsit) ?? 0)) *
                         100;
                 logicalculator.currentText.add(result.toString());
+                print(result);
               }
               logicalculator.currentText.value =
                   logicalculator.currentText.value.replaceAll('=', '');
