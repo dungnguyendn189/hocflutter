@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         if (currentText == currentText) {
           if (currentTextLast ==
               currentText.substring(currentText.length - 2)) {
-            if (currentTextLast == '++') {
+            if (newAddedString == '++') {
               return false;
             }
             return true;
