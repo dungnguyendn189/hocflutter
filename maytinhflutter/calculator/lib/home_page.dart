@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
     bool canInputAddOrSubSubtract(String newAddedString) {
       String currentText = logicalculator.currentText.value;
-
+      String? currentTextLast;
       if (currentText == '') {
         // hiện tại trên màn hình del có text chi
         if (newAddedString == '+' ||
@@ -43,13 +43,17 @@ class _HomePageState extends State<HomePage> {
           // kiểm tra coi nhấn + - mà màn hình ddel có sốchi
           return false;
         }
-      }
-      if (currentText.length - 2 == newAddedString) {
-        if (newAddedString == '++') {
-          return false;
+        if (currentText == currentText) {
+          if (currentTextLast ==
+              currentText.substring(currentText.length - 2)) {
+            if (currentTextLast == '++') {
+              return false;
+            }
+            return true;
+          }
         }
-        return true;
       }
+
       return true;
     }
 
