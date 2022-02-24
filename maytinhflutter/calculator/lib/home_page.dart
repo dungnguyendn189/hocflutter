@@ -47,23 +47,30 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
 
-    // bool canInputAddlastoperation(String inputText) {
+    bool canInPutmidValue(String lasValue) {
+      lasValue == logicalculator.currentText.value;
+      String lasText = lasValue.substring(lasValue.length - 2);
 
-    // }
+      if (lasValue == lasValue) {
+        if (lasText == '++') {
+          return false;
+        }
+      }
+      return true;
+    }
 
     Widget customButton(String value) {
       return Expanded(
         child: TextButton(
           onPressed: () {
-            if (!canInput(logicalculator.currentText.value)) {
+            if (!canInput(value)) {
               return;
             }
-            print(canInput(logicalculator.currentText.value));
-            if (!canInputAddOrSubSubtract(logicalculator.currentText.value)) {
+            if (!canInputAddOrSubSubtract(value)) {
               // coi cái điều kiện ni
               return;
             }
-            print(canInputAddOrSubSubtract(logicalculator.currentText.value));
+
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
 
@@ -90,6 +97,10 @@ class _HomePageState extends State<HomePage> {
             }
             if (value == '+') {
               final fullText = logicalculator.currentText.value;
+              if (!canInPutmidValue(fullText)) {
+                return;
+              }
+              print(!canInPutmidValue(fullText));
               logicalculator.first.add(fullText.replaceAll('+', ''));
               operation = value;
             }
