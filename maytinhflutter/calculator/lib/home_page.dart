@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     String operation = '';
     int enumf = 0;
-    String finalenum;
+
     bool canInput(String newOperationRT) {
       String newOperationRT = logicalculator.currentText.value;
       if (newOperationRT == newOperationRT) {
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
     bool canInputAddOrSubSubtract(String newAddedString) {
       String currentText = logicalculator.currentText.value;
-      String? currentTextLast;
+
       if (currentText == '') {
         // hiện tại trên màn hình del có text chi
         if (newAddedString == '+' ||
@@ -43,19 +43,13 @@ class _HomePageState extends State<HomePage> {
           // kiểm tra coi nhấn + - mà màn hình ddel có sốchi
           return false;
         }
-        if (currentText == currentText) {
-          if (currentTextLast ==
-              currentText.substring(currentText.length - 2)) {
-            if (newAddedString == '++') {
-              return false;
-            }
-            return true;
-          }
-        }
       }
-
       return true;
     }
+
+    // bool canInputAddlastoperation(String inputText) {
+
+    // }
 
     Widget customButton(String value) {
       return Expanded(
@@ -64,10 +58,12 @@ class _HomePageState extends State<HomePage> {
             if (!canInput(logicalculator.currentText.value)) {
               return;
             }
-            if (!canInputAddOrSubSubtract(value)) {
+            print(canInput(logicalculator.currentText.value));
+            if (!canInputAddOrSubSubtract(logicalculator.currentText.value)) {
               // coi cái điều kiện ni
               return;
             }
+            print(canInputAddOrSubSubtract(logicalculator.currentText.value));
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
 
@@ -91,17 +87,16 @@ class _HomePageState extends State<HomePage> {
                 logicalculator.currentText.value =
                     logicalculator.currentText.value.replaceAll('-', '');
               }
-              print(enumf);
             }
             if (value == '+') {
               final fullText = logicalculator.currentText.value;
               logicalculator.first.add(fullText.replaceAll('+', ''));
-              print(logicalculator.currentText.value);
               operation = value;
             }
             if (value == '-') {
               final fulltext = logicalculator.currentText.value;
               logicalculator.first.add(fulltext.replaceAll('-', ''));
+
               operation = value;
             }
             if (value == '/') {
@@ -134,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   // case số đầu ko có dấu -
 
                 }
-                print(secondValue);
+
                 final secondValueAsint = secondValue[1].replaceAll('=', '');
                 final result = (int.tryParse(logicalculator.first.value) ?? 0) -
                     (int.tryParse(secondValueAsint) ?? 0);
@@ -176,7 +171,6 @@ class _HomePageState extends State<HomePage> {
                             (int.tryParse(secondValueAsit) ?? 0)) *
                         100;
                 logicalculator.currentText.add(result.toString());
-                print(result);
               }
               logicalculator.currentText.value =
                   logicalculator.currentText.value.replaceAll('=', '');
