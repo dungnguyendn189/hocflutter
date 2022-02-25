@@ -48,6 +48,11 @@ class _HomePageState extends State<HomePage> {
 
     bool canInPutmidValue(String lasValue) {
       String currentText = logicalculator.currentText.value;
+      if (currentText.length < 1) {
+        // kiểm tra xem text hiện tại có độ dài mấy, độ dài <1 là 0 ==> mặc định cho input dc
+        // cái ni khi qua nói rồi mà cha
+        return true;
+      }
       String lastCurrText = currentText.substring(currentText.length - 1);
       if (currentText == currentText) {
         if (lastCurrText == '+') {
