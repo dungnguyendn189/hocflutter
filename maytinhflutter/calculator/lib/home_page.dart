@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:html';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,14 +47,8 @@ class _HomePageState extends State<HomePage> {
     }
 
     bool canInPutmidValue(String lasValue) {
-      lasValue == logicalculator.currentText.value;
-      String lasText = lasValue.substring(lasValue.length - 2);
-
-      if (lasValue == lasValue) {
-        if (lasText == '++') {
-          return false;
-        }
-      }
+      String currentText = logicalculator.currentText.value;
+      print(currentText);
       return true;
     }
 
@@ -68,6 +61,9 @@ class _HomePageState extends State<HomePage> {
             }
             if (!canInputAddOrSubSubtract(value)) {
               // coi cái điều kiện ni
+              return;
+            }
+            if (!canInPutmidValue(value)) {
               return;
             }
 
@@ -97,10 +93,7 @@ class _HomePageState extends State<HomePage> {
             }
             if (value == '+') {
               final fullText = logicalculator.currentText.value;
-              if (!canInPutmidValue(fullText)) {
-                return;
-              }
-              print(!canInPutmidValue(fullText));
+
               logicalculator.first.add(fullText.replaceAll('+', ''));
               operation = value;
             }
