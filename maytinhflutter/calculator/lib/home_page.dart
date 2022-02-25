@@ -48,7 +48,14 @@ class _HomePageState extends State<HomePage> {
 
     bool canInPutmidValue(String lasValue) {
       String currentText = logicalculator.currentText.value;
-      print(currentText);
+      String lastCurrText = currentText.substring(currentText.length - 1);
+      if (currentText == currentText) {
+        if (lastCurrText == '+') {
+          if (lasValue == '+') {
+            return false;
+          }
+        }
+      }
       return true;
     }
 
