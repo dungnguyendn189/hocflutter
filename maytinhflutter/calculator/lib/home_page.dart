@@ -50,13 +50,150 @@ class _HomePageState extends State<HomePage> {
       String currentText = logicalculator.currentText.value;
       if (currentText.length < 1) {
         // kiểm tra xem text hiện tại có độ dài mấy, độ dài <1 là 0 ==> mặc định cho input dc
-        // cái ni khi qua nói rồi mà cha
+
         return true;
       }
       String lastCurrText = currentText.substring(currentText.length - 1);
       if (currentText == currentText) {
-        if (lastCurrText == '+') {
-          if (lasValue == '+') {
+        if (lastCurrText == '+' ||
+            lastCurrText == '*' ||
+            lastCurrText == '-' ||
+            lastCurrText == '/' ||
+            lastCurrText == '%') {
+          if (lasValue == '+' ||
+              lasValue == '*' ||
+              lasValue == '-' ||
+              lasValue == '/' ||
+              lasValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool twoOperation(String addValue) {
+      String currentText = logicalculator.currentText.value;
+
+      int counter(String currentText) {
+        return currentText.split('').where((element) => element == '+').length;
+      }
+
+      if (currentText == currentText) {
+        if (counter(currentText) == 1) {
+          if (addValue == '+' ||
+              addValue == '-' ||
+              addValue == '/' ||
+              addValue == '*' ||
+              addValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool twoOperation1(String addValue) {
+      String currentText = logicalculator.currentText.value;
+      int counter(String currenttext) {
+        return currentText.split('').where((element) => element == '-').length;
+      }
+
+      if (currentText == currentText) {
+        if (counter(currentText) == 1) {
+          if (addValue == '+' ||
+              addValue == '-' ||
+              addValue == '/' ||
+              addValue == '*' ||
+              addValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool twoOperation2(String addValue) {
+      String currentText = logicalculator.currentText.value;
+      int counter(String currenttext) {
+        return currentText.split('').where((element) => element == '/').length;
+      }
+
+      if (currentText == currentText) {
+        if (counter(currentText) == 1) {
+          if (addValue == '+' ||
+              addValue == '-' ||
+              addValue == '/' ||
+              addValue == '*' ||
+              addValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool twoOperation3(String addValue) {
+      String currentText = logicalculator.currentText.value;
+      int counter(String currenttext) {
+        return currentText.split('').where((element) => element == '*').length;
+      }
+
+      if (currentText == currentText) {
+        if (counter(currentText) == 1) {
+          if (addValue == '+' ||
+              addValue == '-' ||
+              addValue == '/' ||
+              addValue == '*' ||
+              addValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool twoOperation4(String addValue) {
+      String currentText = logicalculator.currentText.value;
+      int counter(String currenttext) {
+        return currentText.split('').where((element) => element == '%').length;
+      }
+
+      if (currentText == currentText) {
+        if (counter(currentText) == 1) {
+          if (addValue == '+' ||
+              addValue == '-' ||
+              addValue == '/' ||
+              addValue == '*' ||
+              addValue == '%') {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    bool ending(String addnewValue) {
+      String currenText = logicalculator.currentText.value;
+      if (currenText.length - 2 < 0) {
+        return true;
+      }
+      String endText = currenText.substring(currenText.length - 2);
+      if (currenText == currenText) {
+        if (endText == '.0') {
+          if (addnewValue == '3' ||
+              addnewValue == '1' ||
+              addnewValue == '2' ||
+              addnewValue == '4' ||
+              addnewValue == '5' ||
+              addnewValue == '6' ||
+              addnewValue == '7' ||
+              addnewValue == '8' ||
+              addnewValue == '9' ||
+              addnewValue == 'C' ||
+              addnewValue == '.' ||
+              addnewValue == '0' ||
+              addnewValue == '+/-') {
             return false;
           }
         }
@@ -78,6 +215,24 @@ class _HomePageState extends State<HomePage> {
             if (!canInPutmidValue(value)) {
               return;
             }
+            if (!twoOperation(value)) {
+              return;
+            }
+            if (!twoOperation1(value)) {
+              return;
+            }
+            if (!twoOperation2(value)) {
+              return;
+            }
+            if (!twoOperation3(value)) {
+              return;
+            }
+            if (!twoOperation4(value)) {
+              return;
+            }
+            if (!ending(value)) {
+              return;
+            }
 
             logicalculator.currentText
                 .add('${logicalculator.currentText.value}$value');
@@ -85,6 +240,14 @@ class _HomePageState extends State<HomePage> {
             if (value == 'AC') {
               logicalculator.currentText.add('');
             }
+            if (value == 'C') {
+              final full = logicalculator.currentText.value;
+              logicalculator.currentText.add(full.replaceAll('C', ''));
+              logicalculator.currentText.value = logicalculator
+                  .currentText.value
+                  .substring(0, logicalculator.currentText.value.length - 1);
+            }
+
             if (value == '+/-') {
               enumf++;
 
@@ -107,6 +270,7 @@ class _HomePageState extends State<HomePage> {
               final fullText = logicalculator.currentText.value;
 
               logicalculator.first.add(fullText.replaceAll('+', ''));
+
               operation = value;
             }
             if (value == '-') {
@@ -147,24 +311,30 @@ class _HomePageState extends State<HomePage> {
                 }
 
                 final secondValueAsint = secondValue[1].replaceAll('=', '');
-                final result = (int.tryParse(logicalculator.first.value) ?? 0) -
-                    (int.tryParse(secondValueAsint) ?? 0);
+                final result =
+                    (double.tryParse(logicalculator.first.value) ?? 0) -
+                        (double.tryParse(secondValueAsint) ?? 0);
                 logicalculator.currentText.add(result.toString());
               }
               if (operation == '+') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
+
                 final secondValueAsint = secondValue[1].replaceAll('=', '');
-                final result = (int.tryParse(logicalculator.first.value) ?? 0) +
-                    (int.tryParse(secondValueAsint) ?? 0);
+
+                final result =
+                    (double.tryParse(logicalculator.first.value) ?? 0) +
+                        (double.tryParse(secondValueAsint) ?? 0);
+
                 logicalculator.currentText.add(result.toString());
               }
               if (operation == '/') {
                 final secondValue =
                     logicalculator.currentText.value.split(operation);
                 final secondValueAsit = secondValue[1].replaceAll('=', '');
-                final result = (int.tryParse(logicalculator.first.value) ?? 0) /
-                    (int.tryParse(secondValueAsit) ?? 0);
+                final result =
+                    (double.tryParse(logicalculator.first.value) ?? 0) /
+                        (double.tryParse(secondValueAsit) ?? 0);
                 logicalculator.currentText.add(result.toString());
               }
               if (operation == '*') {
@@ -173,8 +343,9 @@ class _HomePageState extends State<HomePage> {
 
                 final secondValueAsit = secondValue[1].replaceAll('=', '');
 
-                final result = (int.tryParse(logicalculator.first.value) ?? 0) *
-                    (int.tryParse(secondValueAsit) ?? 0);
+                final result =
+                    (double.tryParse(logicalculator.first.value) ?? 0) *
+                        (double.tryParse(secondValueAsit) ?? 0);
                 logicalculator.currentText.add(result.toString());
               }
               if (operation == '%') {
@@ -183,13 +354,12 @@ class _HomePageState extends State<HomePage> {
 
                 final secondValueAsit = secondValue[1].replaceAll('=', '');
                 final result =
-                    ((int.tryParse(logicalculator.first.value) ?? 0) /
-                            (int.tryParse(secondValueAsit) ?? 0)) *
+                    ((double.tryParse(logicalculator.first.value) ?? 0) /
+                            (double.tryParse(secondValueAsit) ?? 0)) *
                         100;
+
                 logicalculator.currentText.add(result.toString());
               }
-              logicalculator.currentText.value =
-                  logicalculator.currentText.value.replaceAll('=', '');
             }
           },
           child: Container(
@@ -272,7 +442,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Row(
                       children: [
+                        customButton("C"),
                         customButton("0"),
+                        customButton("."),
                         customButton("="),
                       ],
                     ),
