@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     String operation = '';
     int enumf = 0;
-
+// Dont first '='
     bool canInput(String newOperationRT) {
       String newOperationRT = logicalculator.currentText.value;
       if (newOperationRT == newOperationRT) {
@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
 
+// dont first operation
     bool canInputAddOrSubSubtract(String newAddedString) {
       String currentText = logicalculator.currentText.value;
 
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
 
+    // dont use '++' last Sring
     bool canInPutmidValue(String lasValue) {
       String currentText = logicalculator.currentText.value;
       if (currentText.length < 1) {
@@ -72,6 +74,7 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
 
+    // dont use 2 operation
     bool twoOperation(String addValue) {
       String currentText = logicalculator.currentText.value;
 
@@ -173,6 +176,7 @@ class _HomePageState extends State<HomePage> {
       return true;
     }
 
+    // dont add number in finish operation
     bool ending(String addnewValue) {
       String currenText = logicalculator.currentText.value;
       if (currenText.length - 2 < 0) {
