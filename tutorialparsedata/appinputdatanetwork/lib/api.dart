@@ -5,18 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<List<Album>> fetchAlbums(http.Client client) async {
-  final response =
-      await client.get(Uri.parse('https://opentdb.com/api.php?amount=10'));
-
-  // Use the compute function to run parsePhotos in a separate isolate.
-  return compute(parseAlbums, response.body);
-}
-
-List<Album> parseAlbums(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-
-  return parsed.map<Album>((json) => Album.fromJson(json)).toList();
+Future<Album> fetchAlbum() async {
+  final response = await http.get(Uri.parse(
+      'https://opentdb.com/api.php?amount=10&fbclid=IwAR1QkdFsA6byn7lQV-sq1z7aW5uazH30kd7h6XidFBsj_UJMOvRuSfNKQiY'));
+  if (response.statusCode == 200) {
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Faild To load Album');
+  }
 }
 
 class Album {
@@ -25,23 +21,20 @@ class Album {
   final String question;
   final String difficulty;
   final String correct_answer;
-  final List incorrect_answers;
   const Album({
     required this.difficulty,
     required this.category,
     required this.correct_answer,
-    required this.incorrect_answers,
     required this.question,
     required this.type,
   });
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      category: json['category'] as String,
-      correct_answer: json['correct_answer'] as String,
-      incorrect_answers: json['incorrect_answers'] as List,
-      question: json['questrion'] as String,
-      type: json['type'] as String,
-      difficulty: json['difficulty'] as String,
+      category: json['category'],
+      correct_answer: json['correct_answer'],
+      question: json['questrion'],
+      type: json['type'],
+      difficulty: json['difficulty'],
     );
   }
 }
