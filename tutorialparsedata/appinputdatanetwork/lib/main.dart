@@ -25,12 +25,17 @@ class _MyAppState extends State<MyApp> {
           title: Text('ABC'),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            fetchAlbum().then((albumRessponse) => 
-            { print(albumRessponse)
-            final text = albumRessponse.body; ///--> lấy cái text ra
-            final parsed = albulmFromJson(text); //<---step 2
-            print(parsed.result[0].question)//<---print ra test
+          onPressed: () async {
+            fetchAlbum().then((albumRessponse) {
+              print(albumRessponse
+                  .body); //<-- chấm body nó mới ra cái text ông nội ơi!
+              final text = albumRessponse.body;
+
+              ///--> lấy cái text ra
+              final parsed = albumFromJson(text); //<---step 2
+              print(
+                  '---------data dưới đây là trong cái json đã parse---------');
+              print(parsed.results?[0].question); //<---print ra test
             });
           },
           child: Icon(Icons.access_alarms),
