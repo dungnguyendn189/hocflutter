@@ -27,10 +27,12 @@ class _MyAppState extends State<MyApp> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             fetchAlbum().then((albumRessponse) => 
-            { print(albumRessponse)
-            final text = albumRessponse.body; ///--> lấy cái text ra
+            { 
+            final text = albumRessponse.body ;///--> lấy cái text ra
             final parsed = albulmFromJson(text); //<---step 2
-            print(parsed.result[0].question)//<---print ra test
+            print(parsed.result[0].question),
+            print(albumRessponse);
+            //<---print ra test
             });
           },
           child: Icon(Icons.access_alarms),

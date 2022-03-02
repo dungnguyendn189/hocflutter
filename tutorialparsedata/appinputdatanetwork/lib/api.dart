@@ -8,5 +8,5 @@ Future fetchAlbum() {
   final albumRessponse =
       http.get(Uri.parse('https://nielsezeka.github.io/med4.json'));
 
-  return fetchAlbum();
+  return albumRessponse;
 }
