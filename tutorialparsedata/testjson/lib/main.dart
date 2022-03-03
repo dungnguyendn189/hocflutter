@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:testjson/fetch_api.dart';
-import 'package:testjson/info_model.dart';
+
+import 'package:testjson/bussines_api.dart';
+
+import 'package:testjson/fetchdata.dart';
+
+import 'model/album_api.dart';
+import 'model/bussines_api.dart';
+import 'model/titleserver_api.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,9 +27,20 @@ class _MyAppState extends State<MyApp> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            fetchData().then((dataResponse) {
-              final text = dataResponse.body;
-              final parse = infoFromJson(dataResponse);
+            fetchBussiness().then((bussinessRespone) {
+              final text = bussinessRespone.body;
+              final parse = bussinessFromJson(text);
+              print(parse.dataseries?[0].cloudcover);
+            });
+            fetchTitleServer().then((titleServerRespone) {
+              final text = titleServerRespone.body;
+              final parse = titleserverFromJson(text);
+              print(parse.metadata?.addeddate);
+            });
+            fetchAlbum().then((albumRespone) {
+              final text = albumRespone.body;
+              final parse = albumFromJson(text);
+              print(parse.venues?[0].id);
             });
           },
           child: Icon(Icons.ac_unit_outlined),
