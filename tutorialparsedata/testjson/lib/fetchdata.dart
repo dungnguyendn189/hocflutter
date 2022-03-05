@@ -17,5 +17,6 @@ Future fetchTitleServer() {
 Future fetchAlbum() {
   final albumRespone =
       http.get(Uri.parse('https://coinmap.org/api/v1/venues/'));
+
   return albumRespone;
 }
