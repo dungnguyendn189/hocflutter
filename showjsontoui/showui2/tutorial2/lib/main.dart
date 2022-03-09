@@ -12,20 +12,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  List<String>? finalDataShowUI;
   @override
   Widget build(BuildContext context) {
-    List<String>? finalDataShowUI;
     void _showData() {
       fetchNameData().then(
         (nameDataRespone) {
           final text = nameDataRespone.body;
           final parse = nameFromJson(text);
-
           setState(
             () {
               finalDataShowUI =
                   parse.map((e) => e.name!.common.toString()).toList();
-              print(finalDataShowUI?.length);
             },
           );
         },
@@ -50,7 +48,7 @@ class _MyAppState extends State<MyApp> {
             itemBuilder: (context, index) {
               return Column(
                 children: [
-                  Text('${finalDataShowUI?[index]}'),
+                  Text('Name : ${finalDataShowUI?[index]}'),
                 ],
               );
             },
