@@ -11,15 +11,14 @@ import '../model/fake_model.dart';
 import 'alldishes_Item_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage(Size size, {Key? key}) : super(key: key);
+  final size;
+  const HomePage({Key? key, required this.size}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List<CookDataFake> albumCook = cookDataFake;
-
   void initState() {
     super.initState();
     fetchCookData().then(
@@ -51,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   height: widget.size.height * 1 / 30,
                 ),
                 ButtonAllApp(),
-                listAllApp(widget.size, albumCook),
+                listAllApp(widget.size),
               ],
             ),
           ),
@@ -91,30 +90,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget listAllApp(Size size, albumCook) {
-    return InkWell(
-      onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => AllDishesItemPage(
-        //       infomation: name,
-        //       mypicture: '',
-        //       name: '',
-        //     ),
-        //   ),
-        // );
-      },
-      child: Container(
-        padding: EdgeInsets.only(left: 10),
-        height: 250,
-        width: size.width * 1,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: albumCook.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return Container(
+  Widget listAllApp(Size size) {
+    return Container(
+      padding: EdgeInsets.only(left: 10),
+      height: 250,
+      width: size.width * 1,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: cookDataFake.length,
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AllDishesItemPage(
+                      imagePicture: cookDataFake[index].picture,
+                      name: cookDataFake[index].name,
+                      content: cookDataFake[index].Intructions),
+                ),
+              );
+            },
+            child: Container(
               child: Column(
                 children: [
                   Container(
@@ -126,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                       image: DecorationImage(
                         // ignore: prefer_const_constructors
                         image: NetworkImage(
-                          "${albumCook[index].picture}",
+                          "${cookDataFake[index].picture}",
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -139,14 +137,14 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${albumCook[index].name}',
+                          '${cookDataFake[index].name}',
                           style: FontApp.kprimaryText.copyWith(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          '${albumCook[index].category}',
+                          '${cookDataFake[index].category}',
                           style: FontApp.kprimaryText.copyWith(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -157,9 +155,9 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }

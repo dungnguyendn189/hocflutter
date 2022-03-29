@@ -55,7 +55,10 @@ class _LandingPageState extends State<LandingPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage(size)),
+                              builder: (context) => HomePage(
+                                size: size,
+                              ),
+                            ),
                           );
                         },
                         child: Text(
